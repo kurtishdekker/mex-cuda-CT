@@ -1,0 +1,16 @@
+#compiled source #
+*.o
+*.com
+*.exe
+*.dll
+*.mexw64
+
+#temp files#
+*.swp
+*.cu~
+*.asv
+*~
+
+#data files#
+*.vff
+*.mat
