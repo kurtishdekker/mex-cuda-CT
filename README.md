@@ -11,8 +11,10 @@ Rather, the goal here is to provide the fundamental building blocks - the projec
 
 ## Usage Example - simple FBP
 ```MATLAB
-% generate phantom image
-ph = single(phantom3(256)*.02);
+% generate simple cylinder phantom
+[x y] = meshgrid(-191.5 : 191.5,-191.5 : 191.5);
+mask = ((x.^2 + y.^2) <=(140^2));
+ph = repmat(single(mask),[1 1 384])*0.02;
 
 % set up scan geometry
 nProjections = 512;
