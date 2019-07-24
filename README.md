@@ -44,4 +44,4 @@ recon = CUDAmex_BP(filteredSino, SAD, angles, geomFlag);
 
 The tools here are provided as-is under the [BSD License][1].
 
-[1]:LICENSE.txt
+[1]:LICENSE
