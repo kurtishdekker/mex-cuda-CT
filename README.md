@@ -43,7 +43,7 @@ recon = CUDAmex_BP(filteredSino, SAD, angles, geomFlag);
 ## further information
 [Technical Ramblings](documentation/technicalNotes.md)
 
-[Application Examples](documentation/toolUsage.md)
+[Application Examples](documentation/applicationExamples.md)
 
 ## references
 <sup>1</sup>W. van Aarle et al., “The ASTRA Toolbox: A platform for advanced algorithm development in electron tomography,” Ultramicroscopy, vol. 157, pp. 35–47, Oct. 2015.
