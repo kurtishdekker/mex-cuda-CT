@@ -1,16 +1,16 @@
 # example applications
-These tools were originally created during my PhD work on 3D radiation dosimetry *via* optical CT readout of radiochromic gels, and therefore my current list of example applications is all optical-CT specific. However, as there is nothing unique mathematically about optical CT as compared to x-ray CT, there are many areas where the codes could be useful. 
+This section provides a brief list of projects that used these tools. The code was originally written during my PhD work on 3D radiation dosimetry *via* optical CT readout of radiochromic gels, and therefore my list of example applications is all optical-CT specific. However, as there is nothing unique mathematically about optical CT as compared to x-ray CT, there are many areas where the code could be useful. 
 
 ## optical CT
- In addition to using these tools for standard FBP reconstruction of optical CT data from my scanning-laser optical CT system <sup>1</sup>, there were a few other cases where these GPU-accelerated operations are useful.
+In addition to using these tools for standard FBP reconstruction of optical CT data from my scanning-laser optical CT system <sup>1</sup>, there were a few other cases where these GPU-accelerated operations are useful.
 
 ### refracted rays in optical CT
-Unlike x-rays, visible light is strongly refracted. Most optical CT dosimeters are imaged within an "aquarium" of matching refractive index fluid, to preserve standard CT geometry. However, for some plastic dosimeters, these fluids are cumbersome due to high viscosity and difficulty in cleaning (oil-based). Therefore it would be convenient, from a logistical sense, if these could be imaged within a lower refractive index material, using iterative CT techniques to accurately reconstruct an interior region of the cylindrical dosimeter. One of my PhD projects was to experimentally demonstrate this technique <sup>1</sup>, which had previously been published in computer simulation studies <sup>2</sup>
+Unlike x-rays, visible light is strongly refracted. Most optical CT dosimeters are imaged within an "aquarium" of matching refractive index fluid, to preserve standard CT geometry. However, for some plastic dosimeters, these fluids are cumbersome due to high viscosity and difficulty in cleaning (oil-based). Therefore it would be convenient, from a logistical sense, if these could be imaged within a lower refractive index material, using iterative CT techniques to accurately reconstruct an interior region of the cylindrical dosimeter. One of my PhD projects was to experimentally demonstrate this technique <sup>1</sup>, which had previously been published in computer simulation studies<sup>2</sup>.
 
-I originally used the [ASTRA](https://www.astra-toolbox.com/) toolbox to perform these mismatched-index optical CT experiments, however with the addition of the "general3D" geometry option to these tools, they could also be used for such experiments.
+I originally used the [ASTRA](https://www.astra-toolbox.com/) toolbox to perform these mismatched-index optical CT experiments, however with the addition of the "general3D" geometry option to the code, it was later used for similar experiments in our lab.
 
 ### iterative reconstruction
-I used these tools to study the effects of a previously published iterative reconstruction algorithm (OSC-TV)<sup>4,5</sup> on the quantitative accuracy of reconstructions. In particular, we found that care must be taken when reconstructing very small regions of attenuation (in our context, the dose distribution from small field irradiations), as it is possible to introduce quantitative error by over-regularization, an effect that is accentuated by noisy projection data <sup>6</sup
+I used these tools to study the effects of a previously published iterative reconstruction algorithm (OSC-TV)<sup>4,5</sup> on the quantitative accuracy of reconstructions. In particular, we found that care must be taken when reconstructing very small regions of attenuation (in our context, the dose distribution from small field irradiations), as it is possible to introduce quantitative error by over-regularization, an effect that is accentuated by noisy projection data <sup>6</sup>.
 
 ## references
 
