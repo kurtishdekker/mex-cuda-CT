@@ -1,11 +1,12 @@
 # mex-cuda-CT
 
 ## preamble
-GPU-accelerated forward and back projection operators for CT reconstruction.
-Includes code for parallel-beam, fan-beam, and cone-beam geometries. 
+This repository provides GPU-accelerated forward and back projection operators for CT reconstruction, coded in CUDA-C and interfaced with MATLAB through the generation of MEX files.
+
+Projection operators are available for parallel-beam, fan-beam, and cone-beam geometries. 
 Additionally, a "general-3D" geometry option exists, where non-standard ray-paths can be specified.
 
-The purpose of this toolbox is not to provide a large number of implemented reconstruction algorithms. See the ASTRA<sup>1</sup> or TIGRE<sup>2</sup> toolboxes for a more complete set. 
+The purpose of this toolset is not to provide a large number of implemented reconstruction algorithms. See the [ASTRA<sup>1</sup>][4] or [TIGRE<sup>2</sup>][3] toolboxes for a more complete set. 
 Rather, the goal here is to provide the fundamental building blocks - the projection operators - without overwhelming potential users with a myriad of options. That said, a sinogram filtering function for filtered backprojection reconstruction (FBP)<sup>3</sup>, and a TV-minimization based iterative reconstruction algorithm (OSC-TV)<sup>4</sup> are provided as a jumping-off point for users who want to get straight to reconstructing their projection data.
 
 The intended user of these tools is one who wants a direct programmatic interface to GPU-accelerated CT operations and does not need (or, perhaps, want) a standalone application or GUI.
@@ -51,3 +52,5 @@ The tools here are provided as-is under the [BSD License][1].
 
 [1]:LICENSE
 [2]:https://www.mathworks.com/matlabcentral/fileexchange/9416-3d-shepp-logan-phantom
+[3]:https://github.com/CERN/TIGRE
+[4]:https://www.astra-toolbox.com/
