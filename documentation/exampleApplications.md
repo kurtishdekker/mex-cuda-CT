@@ -1,7 +1,7 @@
 # example applications
 These tools were originally created during my PhD work on 3D radiation dosimetry *via* optical CT readout of radiochromic gels, and therefore my current list of example applications is all optical-CT specific. However, as there is nothing unique mathematically about optical CT as compared to x-ray CT, there are many areas where the codes could be useful. 
 
-## Optical CT
+## optical CT
  In addition to using these tools for standard FBP reconstruction of optical CT data from my scanning-laser optical CT system <sup>1</sup>, there were a few other cases where these GPU-accelerated operations are useful.
 
 ### refracted rays in optical CT
