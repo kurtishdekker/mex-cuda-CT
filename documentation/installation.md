@@ -48,7 +48,7 @@
    
    `gpu_compute = '-gencode=arch=compute_XX,code=sm_XX'` needs to have the `XX`s replaced with the [compute capability]() for your specific GPU. For example, to compile for a GPU with compute capability of `6.1`, replace `XX` with `61` (do not include the `.`).
    
-   Once this has been done, run the `compile.m` script. If no errors occur, you should have compiled `.mex` files located in your MATLAB user directory in a subfolder called `mex-cuda-CT`.
+   Once this has been done, run the `compile.m` script. If no errors occur, you should have compiled `.mex` files located in your MATLAB user directory in a subfolder called `mex-cuda-CT`, which should be automatically added to your MATLAB `path` variable.
 
 7. Test functionality
 
