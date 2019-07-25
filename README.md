@@ -17,7 +17,7 @@ Specific installation instructions are provided only for Microsoft Windows 7/10.
 [Windows Installation Instructions](documentation/installation.md)
 
 ## usage example - simple FBP
-This example generates cone-beam projections from a uniform cylindrical phantom, and performs a basic FDK reconstruction (Filtered backprojection). A much more interesting phantom, the 3D Shepp-Logan head phantom, can be generated using a nice [MATLAB function by Matthias Schabel][2].
+This example generates cone-beam projections from a uniform cylindrical phantom, and performs a basic FDK reconstruction (Filtered backprojection). A much more interesting test image, the 3D Shepp-Logan head phantom, can be generated using a [MATLAB function by Matthias Schabel][2].
 
 ```MATLAB
 % generate simple cylinder phantom
