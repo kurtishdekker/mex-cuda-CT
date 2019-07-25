@@ -5,11 +5,14 @@ GPU-accelerated forward and back projection operators for CT reconstruction.
 Includes code for parallel-beam, fan-beam, and cone-beam geometries. 
 Additionally, a "general-3D" geometry option exists, where non-standard ray-paths can be specified.
 
-
 The purpose of this toolbox is not to provide a large number of implemented reconstruction algorithms. See the ASTRA<sup>1</sup> or TIGRE<sup>2</sup> toolboxes for a more complete set. 
-Rather, the goal here is to provide the fundamental building blocks - the projection operators - without overwhelming potential users. That said, a simple filtered backprojection algorithm (FBP)<sup>3</sup> and a TV-minimization based iterative algorithm (OSC-TV)<sup>4</sup> are provided
+Rather, the goal here is to provide the fundamental building blocks - the projection operators - without overwhelming potential users with a myriad of options. That said, a sinogram filtering function for filtered backprojection reconstruction (FBP)<sup>3</sup>, and a TV-minimization based iterative reconstruction algorithm (OSC-TV)<sup>4</sup> are provided as a jumping-off point for users who want to get straight to reconstructing their projection data.
+
+The intended user of these tools is one who wants a direct programmatic interface to GPU-accelerated CT operations and does not need (or, perhaps, want) a standalone application or GUI.
 
 ## Usage Example - simple FBP
+This example generates cone-beam projections from a uniform cylindrical phantom, and performs a basic FDK reconstruction (Filtered backprojection). A much more interesting phantom, the 3D Shepp-Logan head phantom, can be generated using a nice [MATLAB function by Matthias Schabel][2].
+
 ```MATLAB
 % generate simple cylinder phantom
 [x y] = meshgrid(-191.5 : 191.5,-191.5 : 191.5);
@@ -47,3 +50,4 @@ recon = CUDAmex_BP(filteredSino, SAD, angles, geomFlag);
 The tools here are provided as-is under the [BSD License][1].
 
 [1]:LICENSE
+[2]:https://www.mathworks.com/matlabcentral/fileexchange/9416-3d-shepp-logan-phantom
