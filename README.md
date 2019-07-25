@@ -12,7 +12,7 @@ Rather, the goal here is to provide the fundamental building blocks - the projec
 The intended user of these tools is one who wants a direct programmatic interface to GPU-accelerated CT operations and does not need (or, perhaps, want) a standalone application or GUI.
 
 ## installation
-Specific installation instructions are provided only for Microsoft Windows 7/10. An enterprising Linux user should be able to compile the tools, but I have not been able to try this myself. 
+Specific installation instructions are provided only for Microsoft Windows 7/10. An enterprising Linux user should be able to compile the tools, but this has not yet been tested.
 
 [Windows Installation Instructions](documentation/installation.md)
 
