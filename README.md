@@ -16,7 +16,6 @@ Specific installation instructions are provided only for Microsoft Windows 7/10.
 
 [Windows Installation Instructions](documentation/installation.md)
 
-
 ## Usage Example - simple FBP
 This example generates cone-beam projections from a uniform cylindrical phantom, and performs a basic FDK reconstruction (Filtered backprojection). A much more interesting phantom, the 3D Shepp-Logan head phantom, can be generated using a nice [MATLAB function by Matthias Schabel][2].
 
@@ -41,7 +40,10 @@ filteredSino = single(preFilterSinogram(fp, struct('type','cone3d','SAD',SAD),an
 % reconstruct via backprojection
 recon = CUDAmex_BP(filteredSino, SAD, angles, geomFlag);
 ```
+## further information
+[Technical Ramblings](documentation/technicalNotes.md)
 
+[Application Examples](documentation/toolUsage.md)
 
 ## references
 <sup>1</sup>W. van Aarle et al., “The ASTRA Toolbox: A platform for advanced algorithm development in electron tomography,” Ultramicroscopy, vol. 157, pp. 35–47, Oct. 2015.
