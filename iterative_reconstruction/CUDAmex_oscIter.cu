@@ -28,9 +28,9 @@ TODO:
 	try to optimize to reduce amount of gpu vRAM required if necessary, and/or implement code to perform sub-volume reconstructions on larger images
 	
 
-Author: Kurtis H Dekker
-Date: April 10 2017
-Modified: April 13 2017
+Author   : Kurtis H Dekker, PhD
+Created  : April 10 2017
+Modified : July 23, 2019
 
 */
 
