@@ -28,12 +28,16 @@ Modified : July 23, 2019
 
 */
 
+//INCLUDES
 #include "mex.h"
- 
-// This define command is added for the M_PI constant
-#define _USE_MATH_DEFINES 1
 #include <math.h>
 #include <cuda.h>
+ 
+//DEFINES
+#define _USE_MATH_DEFINES 1 // This define command is added for the M_PI constant
+
+//3D texture objects
+texture<float, 3, cudaReadModeElementType> reconTex; //for storing a volume
 
 // macro to handle CUDA errors. Wrap CUDA mallocs and memCpy in here
 #define CHECK_CUDA_ERROR(x) do {\
@@ -45,9 +49,9 @@ Modified : July 23, 2019
 	} \
 } while(0)
 
-void checkCudaError(const char *msg);
 
-texture<float, 3, cudaReadModeElementType> reconTex; //for storing a volume
+//FUNCTION DEFINITIONS
+void checkCudaError(const char *msg);
 
 __global__ void forwardProjKernel_par(float* projectionOut, float bx, float by, float bz, float u0, float v0, float sinBeta, float cosBeta, float SR, float RD, float voxelSize,unsigned int imSizeX, unsigned int imSizeY, unsigned int imSizeZ, unsigned int width, unsigned int height)
 {
