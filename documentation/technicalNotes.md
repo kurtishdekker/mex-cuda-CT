@@ -1,5 +1,5 @@
 # technical ramblings
-This section contains a non-comprehensive, unfiltered set of notes that may be of interest.
+This section contains a non-comprehensive, unfiltered set of notes on some of the oddities of these tools.
 
 ## compilation in 2 stages
 The `compile.m` script runs in 2 stages. 
