@@ -2,28 +2,45 @@
 
 Computes a forward projection operation for a "general" geometry CT dataset wherein projection ray paths are specified by arrays of start and end points rather than a typical SAD/SDD specification.
 
+Usage (Matlab):
+	fp = CUDAmex_FP(image, SAD, angles, nProjections, geomFlag)
+	
+Inputs:
+	projections 		-		the MxMxNz array of 3D image data
+	SAD			-		the source to axis distance, specified in voxel units
+	angles			-		array containing the projection angles in radians
+	nProjections		-		number of projections
+	geomFlag		-		a flag specifying the CT geometry (0 = parallel, 1 = fan, 2 = cone beam)
+	
+Outputs:
+	fp 			-		the MxNxNprojections array of simulated projection data
+	
+Dependencies:
+	CUDA toolkit v6.0 or later
+		
+NOTES:
+	uses single precision. input arrays in matlab should be cast as type single
+TODO:
+Author  : Kurtis H Dekker, PhD
+Created  : April 10 2017
+Modified : July 23, 2019
 
-Kurtis H Dekker, PhD
-Department of Medical Physics,
-Cancer Centre of Southeastern Ontario,
-Kingston General Hospital,
-Kingston, ON, CANADA
-
-Created : July 2 2015
-Modified: March 21 2016 - support array of projection angles (non-equal spacing)
-		  July 23 2019  - cleanup and commenting for public release
 */
 
+//INCLUDES
 #include "mex.h"
- 
-// This define command is added for the M_PI constant
-#define _USE_MATH_DEFINES 1
 #include <math.h>
 #include <cuda.h>
 
+
+//DEFINES
+#define _USE_MATH_DEFINES 1 // This define command is added for the M_PI constant
 // define a NaN value and an Inf value that cannot be compiler-optimized away
 #define CUDART_NAN_F __int_as_float(0x7fffffff)
 #define CUDART_INF_F __int_as_float(0x7f800000)
+
+//Texture Objects
+texture<float, 3, cudaReadModeElementType> reconTex; //for storing a volume
 
 // macro to handle CUDA errors. Wrap CUDA mallocs and memCpy in here
 #define CHECK_CUDA_ERROR(x) do {\
@@ -35,9 +52,9 @@ Modified: March 21 2016 - support array of projection angles (non-equal spacing)
 	} \
 } while(0)
 
-void checkCudaError(const char *msg);
 
-texture<float, 3, cudaReadModeElementType> reconTex; //for storing a volume
+//FUNCTION DEFINITIONS
+void checkCudaError(const char *msg);
 
 __global__ void forwardProjKernel( float* projectionOut, float* ptsArray, float bx, float by, float bz, float sinBeta, float cosBeta, float voxelSize, unsigned int imSizeX, unsigned int imSizeY, unsigned int imsizeZ, unsigned int width, unsigned int height )
 {
