@@ -1,12 +1,28 @@
 /*CUDAmex_BP.cu
 Computes backprojection operation for a parallel-beam, stacked fan-beam, or cone-beam CT geometry. 
 
-Authors: Kurtis Dekker
-         David Turnbull (prior version of cone beam backprojector)
+Usage (Matlab):
+	bp = CUDAmex_BP(projections, SAD, angles, geomFlag);
+Inputs:
+	projections 		-		the MxNxNproj array of projection data
+	SAD			-		the source to axis distance, specified in voxel units
+	angles			-		array containing the projection angles in radians
+	geomFlag		-		a flag specifying the CT geometry (0 = parallel, 1 = fan, 2 = cone beam)
+	
+Outputs:
+	bp 			-		the 3D volume resulting from backprojection
+	
+Dependencies:
+	CUDA toolkit v6.0 or later
+		
+NOTES:
+	uses single precision. input arrays in matlab should be cast as type single
+TODO:
 
-Created : July 2 2015
-Modified: March 21 2016 - support array of projection angles (non-equal spacing)
-		        July 23 2019  - cleanup and commenting for public release
+Author   : Kurtis H Dekker, PhD
+Created  : April 10 2017
+Modified : July 23, 2019
+
 */
 
 #include "mex.h"
