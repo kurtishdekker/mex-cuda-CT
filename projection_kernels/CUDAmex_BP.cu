@@ -19,7 +19,8 @@ NOTES:
 	uses single precision. input arrays in matlab should be cast as type single
 TODO:
 
-Author   : Kurtis H Dekker, PhD
+Authors  : Kurtis H Dekker, PhD
+	   David Turnbull - initial version of cone beam backprojector
 Created  : April 10 2017
 Modified : July 23, 2019
 
