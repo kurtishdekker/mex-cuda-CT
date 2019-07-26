@@ -38,8 +38,6 @@ tic; fp_par = CUDAmex_FP(ph,SAD, angles, nProjections); toc;
 tic; fp_general = CUDAmex_general3D_FP(ph,angles,pts,nProjections); toc;
 %% reconstruct
 filt = single(preFilterSinogram(fp_par,struct('type','par3d','SAD',1000),angles,'hamming',1));
-tic; bp = CUDAmex_BP(filt,inf,angles,0); toc;
-tic; bp2 = CUDAmex_general3D_BP(filt,angles,pts, 256,256); toc; %yields discretization artifacts unless super-sampling of rays is done
+tic; bp_par = CUDAmex_BP(filt,inf,angles,0); toc;
+tic; bp_general = CUDAmex_general3D_BP(filt,angles,pts, 256,256); toc; %yields discretization artifacts unless super-sampling of rays is done
 
-%%
-imagine(ph,bp,bp2);
