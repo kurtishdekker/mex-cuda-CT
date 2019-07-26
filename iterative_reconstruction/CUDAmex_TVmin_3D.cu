@@ -36,8 +36,7 @@ Modified : July 23, 2019
 //INCLUDES
 #include "mex.h"
  
-// This define command is added for the M_PI constant
-#define _USE_MATH_DEFINES 1
+
 #include <math.h>
 #include <cuda.h>
 
@@ -52,6 +51,7 @@ Modified : July 23, 2019
 
 
 //DEFINES
+#define _USE_MATH_DEFINES 1 // This define command is added for the M_PI constant
 
 // macro to handle CUDA errors. Wrap CUDA mallocs and memCpy in here
 #define CHECK_CUDA_ERROR(x) do {\
