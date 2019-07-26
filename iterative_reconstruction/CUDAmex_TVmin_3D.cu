@@ -10,6 +10,11 @@ TODO:
 	remove hard-coded number of TV-minimization iterations, allow specification in function call.
 
 
+References:
+[1] K. H. Dekker, J. J. Battista, and K. J. Jordan, Medical Physics, vol. 44, no. 12, pp. 6678–6689, Dec. 2017.
+[2] D. Matenine, Y. Goussard, and P. Després, Medical Physics, vol. 42, no. 4, pp. 1505–1517, Apr. 2015.
+
+
 Author   : Kurtis H Dekker, PhD
 Created  : April 10 2017
 Modified : July 23, 2019
