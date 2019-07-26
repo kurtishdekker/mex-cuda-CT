@@ -2,29 +2,38 @@
 
 Computes a backprojection operation for a "general" geometry CT dataset wherein projection ray paths are specified by arrays of start and end points rather than a typical SAD/SDD specification.
 
+Usage (Matlab):
+	bp = CUDAmex_BP(projections, SAD, angles, geomFlag);
+	
+Inputs:
+	projections 		-		the MxNxNproj array of projection data
+	SAD			-		the source to axis distance, specified in voxel units
+	angles			-		array containing the projection angles in radians
+	geomFlag		-		a flag specifying the CT geometry (0 = parallel, 1 = fan, 2 = cone beam)
+	
+Outputs:
+	bp 			-		the 3D volume resulting from backprojection
+	
+Dependencies:
+	CUDA toolkit v6.0 or later
+		
+NOTES:
+	uses single precision. input arrays in matlab should be cast as type single
+	
 
-Kurtis H Dekker, PhD
-Department of Medical Physics,
-Cancer Centre of Southeastern Ontario,
-Kingston General Hospital,
-Kingston, ON, CANADA
-
-Created : July 2 2015
-Modified: March 21 2016 - support array of projection angles (non-equal spacing)
-		  July 23 2019  - cleanup and commenting for public release
+Authors  : Kurtis H Dekker, PhD
+Created  : April 10 2017
+Modified : July 23, 2019
 */
 
 
-//INCLUDES AND DEFINES
-
+//INCLUDES
 #include "mex.h"
- 
-// This define command is added for the M_PI constant
-#define _USE_MATH_DEFINES 1
-
 #include <math.h>
 #include <cuda.h>
 
+//DEFINES
+#define _USE_MATH_DEFINES 1 // This define command is added for the M_PI constant
 // define a NaN value and an Inf value that cannot be compiler-optimized away
 #define CUDART_NAN_F __int_as_float(0x7fffffff)
 #define CUDART_INF_F __int_as_float(0x7f800000)
@@ -39,12 +48,12 @@ Modified: March 21 2016 - support array of projection angles (non-equal spacing)
 	} \
 } while(0)
 
+
 //FUNCTION DEFINITIONS
 void checkCudaError(const char *msg);
 __device__ float calcLength(float alpha, float alphaCurrent, float dConv);
 __device__ float phi(float alpha, float b, float d, float p1, float p2);
 __device__ void update(float *alpha, int *ind, float d, float p1, float p2);
-
 
 
 //backprojection kernel
