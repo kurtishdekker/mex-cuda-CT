@@ -9,9 +9,9 @@ Usage:
 
 
 
-Author: Kurtis H Dekker
-Date: April 4 2017
-Modified: April 5 2017
+Author   : Kurtis H Dekker, PhD
+Created  : April 10 2017
+Modified : July 23, 2019
 
 */
 
