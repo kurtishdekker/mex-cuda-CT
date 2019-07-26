@@ -3,6 +3,7 @@ Computes backprojection operation for a parallel-beam, stacked fan-beam, or cone
 
 Usage (Matlab):
 	bp = CUDAmex_BP(projections, SAD, angles, geomFlag);
+	
 Inputs:
 	projections 		-		the MxNxNproj array of projection data
 	SAD			-		the source to axis distance, specified in voxel units
@@ -17,7 +18,7 @@ Dependencies:
 		
 NOTES:
 	uses single precision. input arrays in matlab should be cast as type single
-TODO:
+	
 
 Authors  : Kurtis H Dekker, PhD
 	   David Turnbull - initial version of cone beam backprojector
