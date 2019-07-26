@@ -1,8 +1,13 @@
-// CUDAmex_conebeam_s.cu : mex-function interface implentation file
-//
-//Author:   David Turnbull (LHSC) (original version, 2010-05-18)
-//          Kurtis Dekker (LHSC) (modified version, 2015-06-29)
+/*CUDAmex_BP.cu
+Computes backprojection operation for a parallel-beam, stacked fan-beam, or cone-beam CT geometry. 
 
+Authors: Kurtis Dekker
+         David Turnbull (prior version of cone beam backprojector)
+
+Created : July 2 2015
+Modified: March 21 2016 - support array of projection angles (non-equal spacing)
+		        July 23 2019  - cleanup and commenting for public release
+*/
 
 #include "mex.h"
  
@@ -173,15 +178,12 @@ __global__ void backprojKernel_cone(float* output, float v0, float sinBeta, floa
         float x = ix - (halfwidth + 0.5f);
         float y = iy - (halfwidth + 0.5f);
 
-        //float sinBeta,cosBeta;
-        //sincos(beta,&sinBeta,&cosBeta);
-
         //compute rotated coordinates <s,t> for projection at angle "Beta"
         float s = x*cosBeta + y*sinBeta;
         float t = -x*sinBeta + y*cosBeta;
 
         //compute "U", which is the scaling factor needed to convert from image voxel coordinates to projection coordinates
-        //the logic here is simply based on similar triangles which have the optic axis as their base.
+        //the logic here is simply based on similar triangles with the optic axis as their base.
         float U = SR / (SR-s);
 
         //compute horizontal (y) and vertical (z) coordinates in the projection
@@ -196,11 +198,6 @@ __global__ void backprojKernel_cone(float* output, float v0, float sinBeta, floa
         }
     }
 }
-
-///////////////////////////////////////////////////////////////////////////////
-
-// The backprojection part of the FDK algorithm
-// We assume that the data to be backprojected, P, is already pre-weighted and ramp filtered
  
 void mexFunction( int nlhs, mxArray *plhs[], int nrhs, const mxArray*prhs[] ) 
 {
@@ -226,7 +223,7 @@ void mexFunction( int nlhs, mxArray *plhs[], int nrhs, const mxArray*prhs[] )
    plhs[0] = mxCreateNumericArray(3, dims, mxSINGLE_CLASS, mxREAL);
    recon = (float*)mxGetData(plhs[0]);
 
-   // the center of the detector plane
+   // u,v coordinates of the center of the detector plane
    float u0 = float(dim_array[0]-1)/2;
    float v0 = float(dim_array[1]-1)/2;
 
@@ -272,7 +269,6 @@ void mexFunction( int nlhs, mxArray *plhs[], int nrhs, const mxArray*prhs[] )
    
    for(size_t projection=0; projection<dim_array[2]; projection+=1)   // hardwired for 512 projections
    {
-     // beta = projSpacing * (float)projection + initialProjAngle; //added initial offset, needed for OSC
       beta = projAngs[projection];
       sincosf(beta, &sinBeta, &cosBeta);
       cudaMemcpyToArray(cuArray1, 0, 0, &P[  projection*projOffset  ], sizeTex, cudaMemcpyHostToDevice);
@@ -294,7 +290,7 @@ void mexFunction( int nlhs, mxArray *plhs[], int nrhs, const mxArray*prhs[] )
       
       cudaThreadSynchronize();
       checkCudaError("main kernel invocation");
-   } // for projections 1-51
+   } 
    
    ptrRecon = recon;
    cudaMemcpy(ptrRecon, output, outputMemSize, cudaMemcpyDeviceToHost);
@@ -306,7 +302,7 @@ void mexFunction( int nlhs, mxArray *plhs[], int nrhs, const mxArray*prhs[] )
    return;
 }
 
-///////////////////////////////////////////////////////////////////////////////
+//check for CUDA errors
 void checkCudaError(const char *msg)
 {
    cudaError_t err = cudaGetLastError();
