@@ -2,14 +2,17 @@ function recon = OSC_TV_recon(pre,post, scanAngles, geom, numIter,TV_constant,nu
 % OSC_TV_CBCT.M - gpu reconstruction with OSC-TV (matenine, 2015, Laval U)
 %
 % Inputs:
-%       pre - reference scan (MxNxNproj, eg. 480x640x1024)
-%       post - data scan
-%       geom - the structure specifying fan, cone, or
-%       parallel-beam CT geometry and SAD if needed
-%       scanAngularExtent - rotational extent of the CBCT scan (radians)
-%       numIter - number of iterations to perform
-%       tv_constant - regularization constant. Typical value is 0.02 or
-%       0.05 (Matenine et al 2015)
+%       pre                             -       reference scan (MxNxNproj, eg. 480x640x1024)
+%       post                            -       data scan
+%       geom                            -       the structure specifying fan, cone, or
+%                                               parallel-beam CT geometry and SAD if needed
+%       scanAngularExtent               -       rotational extent of the CBCT scan (radians)
+%       numIter                         -       number of iterations to perform
+%       TV_constant                     -       regularization constant. Typical value is 0.02 or
+%                                               0.05 (Matenine et al 2015)
+%       numSubsInit, numSubsFinal, pVal -       number of subsets in first and
+%                                               last iteration, and p-value of the subset reduction equation, see
+%                                               Matenine et al 2015.
 %
 % Output:
 %       recon - final reconstruction dataset. Size will be determined by
@@ -25,7 +28,7 @@ function recon = OSC_TV_recon(pre,post, scanAngles, geom, numIter,TV_constant,nu
 % 
 % Author   : Kurtis H Dekker, PhD
 % Created  : April 10 2017
-% Modified : July 23, 2019
+% Modified : July 26, 2019
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 mu = ones(size(post,1),size(post,1),size(post,2),'single').*1e-10; %adjust size here
 nProj = size(post,3);
@@ -62,11 +65,11 @@ for k = 1:numIter
         mu_old = (mu_old - mu);
         mu_old(isnan(mu_old))=0;
         d_a = sqrt(sum(mu_old(:).^2));
-        mu = CUDAmex_TVmin_3D(mu,TV_constant*d_a); %call mex for Tv-min, first divide TV-const  by d_a
+        mu = CUDAmex_TVmin_3D(mu,TV_constant*d_a); %call mex for Tv-min, first multiply TV-const  by d_a
     end
     figure(1000); imagesc(mu(:,:,round(size(mu,3)/2))); axis equal; axis tight; title(['iteration: ' num2str(k)]); pause(0.01);
 end
-
+recon=mu;
 
 function numSubsets = calcNumSubsets(sInit,sFinal,pVal,maxIters,iterationNumber)
 
