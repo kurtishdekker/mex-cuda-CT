@@ -79,7 +79,7 @@ end
 
 % compile the object files into .mex files
 mex('/NODEFAULTLIB:MSVCRT.lib','-largeArrayDims', 'CUDAmex_oscIter.o', ['-L' cuda_path], '-lcudart');
-mex('/NODEFAULTLIB:MSVCRT.lib','-largeArrayDims', 'CUDAmex_oscIter.o', ['-L' cuda_path], '-lcudart');
+mex('/NODEFAULTLIB:MSVCRT.lib','-largeArrayDims', 'CUDAmex_TVmin_3D.o', ['-L' cuda_path], '-lcudart');
 
 movefile('*.mex*', user_matlab_path);
 
