@@ -52,7 +52,7 @@
 
 7. Test functionality
 
-   The functionality of the forward and back projection operators and FBP reconstruction code can be tested using `examples\projection_FBP_test.m`.
+   The functionality of the forward and back projection operators and FBP reconstruction code can be tested using `examples/projection_FBP_test.m` (for standard geometry) and `examples/general3D_projection_test.m` for the general3D projectors. 
 
    The functionality of OSC-TV reconstruction code can be tested using `examples\OSC-TV_test.m`.
 
