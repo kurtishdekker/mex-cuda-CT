@@ -26,16 +26,19 @@ Modified : July 23, 2019
 
 */
 
+//INCLUDES
 #include "mex.h"
- 
-// This define command is added for the M_PI constant
-#define _USE_MATH_DEFINES 1
 #include <math.h>
 #include <cuda.h>
 
-void checkCudaError(const char *msg);
+//DEFINES
+#define _USE_MATH_DEFINES 1 // This define command is added for the M_PI constant
+
 // 2D float texture
 texture<float, 2, cudaReadModeElementType> projtex; //for storing a projection
+
+//FUNCTION DEFINITIONS
+void checkCudaError(const char *msg);
 
 __global__ void backprojKernel_par(float* output, float v0, float sinBeta, float cosBeta, float SR, unsigned int width, unsigned int height)
 {
