@@ -8,7 +8,7 @@ which are then compiled into `.mex` files in MATLAB using the `mex` command.
 This is a holdover from earlier versions of MATLAB where I had difficulty making `mex` cooperate with `nvcc` at the time. 
 It is very likely that the `compile.m` script could be simplified to simply use a single-stage `mex` command.
 
-## code duplication in CUDAmex_oscIter.cu
+## code duplication from CUDAmex_FP/BP to CUDAmex_oscIter.cu
 The projection operators are duplicated in `CUDAmex_oscIter.cu`. This is a holdover from when I started out and did not know how to use `nvcc` and `mex` with multiple files. A housekeeping task would be to separate the projection kernels out from the `mex` function code to avoid code copy-pasting.
 
 ## projection operators and interpolation
