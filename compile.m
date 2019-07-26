@@ -7,7 +7,7 @@ else
 end
 
 matlab_path = [matlabroot '\extern\include'];
-vs_path = 'C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\' %this will need to be changed for your installation of visual studio
+vs_path = 'C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC' %this will need to be changed for your installation of visual studio
 gpu_compute = '-gencode=arch=compute_61,code=sm_61'; %change the numbers for your specific GPU compute capability (i.e. compute capability 5.2 -> 52, etc.)
 
 user_matlab_path = [userpath '\mex-cuda-CT'];
