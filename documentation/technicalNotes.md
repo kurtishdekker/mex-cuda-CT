@@ -32,7 +32,7 @@ Effectively, we perform the inverse of the forward projection operation describe
 This is problematic because we are parallelized on the individual rays, and so multiple threads may be trying to write to the same voxel.
 Without accounting for this, information would be lost. Fortunately, `atomicAdd` operations allow threads to "block" a voxel, forcing 
 other threads to wait their turn to increment its value. While this prevents loss of information, it is significantly slower due to 
-the sequential writing of many voxels.
+the sequential writing of many voxels. It will also lead to discretization artifacts if ray super-sampling is not used as the implicit interpolation used for the standard geometries is not used here.
 
 ## recon size set by projection / projection size set by recon
 In this version of the code, by default the reconstruction dimensions (MxMxN) will be set by the projection dimensions (MxN), 
