@@ -1,12 +1,13 @@
 /*CUDAmex_TVmin_3D.cu
 
 Perform total variation regularization de-noising on a 3D image volume. 
-Compiles to a MEX function with MATLAB, use script compile_CUDAmex_tvmin.m
+Compiles to a MEX function with MATLAB.
 
-MEX FUNCTION DETAILS
-Usage:
-    image_out = CUDAmex_tvmin_3D(image_in,tvConst)
+Usage (matlab):
+    	image_out = CUDAmex_tvmin_3D(image_in,tvConst)
 
+TODO:
+	remove hard-coded number of TV-minimization iterations, allow specification in function call.
 
 
 Author   : Kurtis H Dekker, PhD
