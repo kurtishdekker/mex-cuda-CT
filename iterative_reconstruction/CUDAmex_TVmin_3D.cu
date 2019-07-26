@@ -3,8 +3,19 @@
 Perform total variation minimization de-noising on a 3D image volume. 
 Compiles to a MEX function with MATLAB.
 
-Usage (matlab):
+Usage (Matlab):
     	image_out = CUDAmex_tvmin_3D(image_in,tvConst)
+
+Inputs:
+	image_in 		-		the input 3D volume to be de-noised 
+	tvConst			- 		constant specifying the strength of the regularization (see [1] and [2])
+
+Outputs:
+	image_out		-		the de-noised 3D image volume
+	
+Dependencies:
+	CUDA toolkit v6.0 or later
+	NVIDIA GPU with compute capability 3.5 or higher and enough vRAM to store 3 arrays of size Nx x Ny x Nz (recon size)
 
 TODO:
 	remove hard-coded number of TV-minimization iterations, allow specification in function call.
