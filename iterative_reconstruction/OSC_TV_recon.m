@@ -1,7 +1,7 @@
 function recon = OSC_TV_recon(pre,post, scanAngles, geom, numIter,TV_constant,numSubsInit,numSubsFinal,pVal)
-%OSC_TV_CBCT.M - gpu reconstruction with OSC-TV (matenine, 2015, Laval U)
+% OSC_TV_CBCT.M - gpu reconstruction with OSC-TV (matenine, 2015, Laval U)
 %
-%Inputs:
+% Inputs:
 %       pre - reference scan (MxNxNproj, eg. 480x640x1024)
 %       post - data scan
 %       geom - the structure specifying fan, cone, or
@@ -11,16 +11,21 @@ function recon = OSC_TV_recon(pre,post, scanAngles, geom, numIter,TV_constant,nu
 %       tv_constant - regularization constant. Typical value is 0.02 or
 %       0.05 (Matenine et al 2015)
 %
-%Output:
+% Output:
 %       recon - final reconstruction dataset. Size will be determined by
 %       projection size
 %
-%Dependencies:
+% Dependencies:
 %       NVIDIA GPU with sufficient memory for recon grid
 %       CUDA toolbox v6.0 or higher
 %
-%Created:  April 10 2017 by Kurtis H. Dekker
-%Modified: July 25 2019 by KHD
+% References:
+%       [1] K. H. Dekker, J. J. Battista, and K. J. Jordan, Medical Physics, vol. 44, no. 12, pp. 6678–6689, Dec. 2017.
+%       [2] D. Matenine, Y. Goussard, and P. Després, Medical Physics, vol. 42, no. 4, pp. 1505–1517, Apr. 2015.
+% 
+% Author   : Kurtis H Dekker, PhD
+% Created  : April 10 2017
+% Modified : July 23, 2019
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 mu = ones(size(post,1),size(post,1),size(post,2),'single').*1e-10; %adjust size here
 nProj = size(post,3);
