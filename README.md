@@ -35,7 +35,7 @@ geomFlag = 2; %0 = parallel-beam, 1 = fan-beam, 2 = cone-beam
 fp = CUDAmex_FP(ph, SAD, angles, nProjections, geomFlag);
 
 % filter sinogram data
-filteredSino = single(preFilterSinogram(fp, struct('type','cone3d','SAD',SAD),angles,'hamming',1);
+filteredSino = single(preFilterSinogram(fp, struct('type','cone3d','SAD',SAD),angles,'hamming',1));
 
 % reconstruct via backprojection
 recon = CUDAmex_BP(filteredSino, SAD, angles, geomFlag);
