@@ -3,16 +3,17 @@
 Computes a backprojection operation for a "general" geometry CT dataset wherein projection ray paths are specified by arrays of start and end points rather than a typical SAD/SDD specification.
 
 Usage (Matlab):
-	bp = CUDAmex_BP(projections, SAD, angles, geomFlag);
+	bp = CUDAmex_general3D_BP(projections,angles,pts, M,N)
 	
 Inputs:
 	projections 		-		the MxNxNproj array of projection data
-	SAD			-		the source to axis distance, specified in voxel units
-	angles			-		array containing the projection angles in radians
-	geomFlag		-		a flag specifying the CT geometry (0 = parallel, 1 = fan, 2 = cone beam)
+	angles				-		array containing the projection angles in radians
+	pts 				-		MxNx6 array specifying starting points (x1,y1,z1) and ending points (x2,y2,z2) for each ray in the projection. 
+								The order of coordinates along dimension 3 is (x1,y1,z1,x2,y2,z2). Units are in 3D reconstruction volume voxels
+	M,N					-		The size of the reconstructed volume - MxMxN voxels
 	
 Outputs:
-	bp 			-		the 3D volume resulting from backprojection
+	bp 					-		the MxMxN 3D volume resulting from backprojection
 	
 Dependencies:
 	CUDA toolkit v6.0 or later
@@ -23,7 +24,7 @@ NOTES:
 
 Authors  : Kurtis H Dekker, PhD
 Created  : April 10 2017
-Modified : July 23, 2019
+Modified : July 26, 2019
 */
 
 

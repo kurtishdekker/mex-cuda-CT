@@ -3,24 +3,24 @@
 Computes a forward projection operation for a "general" geometry CT dataset wherein projection ray paths are specified by arrays of start and end points rather than a typical SAD/SDD specification.
 
 Usage (Matlab):
-	fp = CUDAmex_FP(image, SAD, angles, nProjections, geomFlag)
+	fp = CUDAmex_general3D_FP(ph,angles,pts,nProjections)
 	
 Inputs:
-	projections 		-		the MxMxNz array of 3D image data
-	SAD			-		the source to axis distance, specified in voxel units
-	angles			-		array containing the projection angles in radians
-	nProjections		-		number of projections
-	geomFlag		-		a flag specifying the CT geometry (0 = parallel, 1 = fan, 2 = cone beam)
+	projections        -		array of 3D image data
+	angles             -		array containing the projection angles in radians
+	pts                -        MxNx6 array of points defining primary ray paths through the 3D volume. 
+                                The order of coordinates along dimension 3 is (x1,y1,z1,x2,y2,z2). Units are in 3D reconstruction volume voxels
+    nProjections	   -		number of projections
 	
 Outputs:
-	fp 			-		the MxNxNprojections array of simulated projection data
+	fp 			       -		the MxNxNprojections array of simulated projection data
 	
 Dependencies:
 	CUDA toolkit v6.0 or later
 		
 NOTES:
 	uses single precision. input arrays in matlab should be cast as type single
-TODO:
+
 Author  : Kurtis H Dekker, PhD
 Created  : April 10 2017
 Modified : July 23, 2019
