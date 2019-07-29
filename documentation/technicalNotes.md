@@ -12,7 +12,7 @@ It is very likely that the `compile.m` script could be simplified to simply use 
 The projection operators are duplicated in `CUDAmex_oscIter.cu`. This is a holdover from when I started out and did not know how to use `nvcc` and `mex` with multiple files. A housekeeping task would be to separate the projection kernels out from the `mex` function code to avoid code copy-pasting.
 
 ## projection operators and interpolation
-We use interpolation for both forward and back projection operations, making use of hardware interpolation (Texture interpolation) 
+We use interpolation for both forward and back projection operations, making use of hardware acceleration (texture memory) 
 where possible, for speed.
 
 ### forward projection 
