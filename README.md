@@ -54,19 +54,19 @@ recon = CUDAmex_BP(filteredSino, SAD, angles, geomFlag);
 
 <sup>4</sup>D. Matenine, Y. Goussard, and P. Després, “GPU-accelerated regularized iterative reconstruction for few-view cone beam CT,” Medical Physics, vol. 42, no. 4, pp. 1505–1517, Apr. 2015.
 
-## licensing
-
-The tools here are provided as-is under the [BSD License][1].
-
 ## author
 
 **Kurtis H. Dekker, PhD**\
 Department of Medical Physics\
 Cancer Centre of Southeastern Ontario at Kingston General Hospital\
-Kingston, Ontario, CANADA
-
+Kingston, Ontario, CANADA\
 [linkedin](https://www.linkedin.com/in/kurtisdekker/)\
 [researchgate](https://www.researchgate.net/profile/Kurtis_Dekker)
+
+
+## license
+
+The tools here are provided as-is under the [BSD License][1].
 
 [1]:LICENSE
 [2]:https://www.mathworks.com/matlabcentral/fileexchange/9416-3d-shepp-logan-phantom
