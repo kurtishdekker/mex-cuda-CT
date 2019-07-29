@@ -4,7 +4,7 @@ Mex source code.
 Compute 1 iteration of the OSC algorithm using the GPU.
 
 Usage (Matlab):
-	output = CUDAmex_OSCiter(reconVol, preScan, postScan, numSubsets, scanAngles,geomFlag);
+	CUDAmex_OSCiter(reconVol, preScan, postScan, numSubsets, scanAngles,geomFlag);
 
 Inputs:
 	reconVol 		-		the current estimate of the 3D image 
@@ -14,8 +14,9 @@ Inputs:
     	subsetPicks     	-       	order of subsets
 	scanAngles		-		vector of angles (in radians) at which projections are acquired
 	geomFlag		-		flag specifying parallel (0), fan (1) or cone (2) CT geometry
+	
 Outputs:
-	output 			-		the updated 3D image volume for the iteration
+	There is no separate output variable for this function, however the "reconVol" input variable will be updated
 	
 Dependencies:
 	CUDA toolkit v6.0 or later
