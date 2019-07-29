@@ -11,7 +11,7 @@ Inputs:
 	preScan	 		-		pre-scan projection data 
 	postScan		-		post-scan projection data
 	numSubsets		-		number of subsets to divide projections into on the current iteration
-    subsetPicks     -       order of subsets
+    	subsetPicks     	-       	order of subsets
 	scanAngles		-		vector of angles (in radians) at which projections are acquired
 	geomFlag		-		flag specifying parallel (0), fan (1) or cone (2) CT geometry
 Outputs:
