@@ -6,7 +6,7 @@ function recon = OSC_TV_recon(pre,post, scanAngles, geom, numIter,TV_constant,nu
 %       post                            -       data scan
 %       geom                            -       the structure specifying fan, cone, or
 %                                               parallel-beam CT geometry and SAD if needed
-%       scanAngularExtent               -       rotational extent of the CBCT scan (radians)
+%       scanAngules                     -       angles of projection images (radians)
 %       numIter                         -       number of iterations to perform
 %       TV_constant                     -       regularization constant. Typical value is 0.02 or
 %                                               0.05 (Matenine et al 2015)
