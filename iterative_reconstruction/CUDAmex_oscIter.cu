@@ -1,10 +1,10 @@
-/*CUDAmex_OSCiter_par3D.cu
+/*CUDAmex_OSCiter.cu
 
 Mex source code.
 Compute 1 iteration of the OSC algorithm using the GPU.
 
 Usage (Matlab):
-	output = CUDAmex_OSCiter_par3D(reconVol, preScan, postScan, numSubsets, scanAngles,geomFlag);
+	output = CUDAmex_OSCiter(reconVol, preScan, postScan, numSubsets, scanAngles,geomFlag);
 
 Inputs:
 	reconVol 		-		the current estimate of the 3D image 
