@@ -9,7 +9,7 @@ Additionally, a "general-3D" geometry option exists, where non-standard ray-path
 The purpose of this toolset is not to provide a large number of implemented reconstruction algorithms. See the [ASTRA<sup>1</sup>][4] or [TIGRE<sup>2</sup>][3] toolboxes for a more complete set. 
 Rather, the goal here is to provide the fundamental building blocks - the projection operators - without overwhelming potential users with a myriad of options. That said, a sinogram filtering function for filtered backprojection reconstruction (FBP)<sup>3</sup>, and a TV-minimization based iterative reconstruction algorithm (OSC-TV)<sup>4</sup> are provided as a jumping-off point for users who want to get straight to reconstructing their projection data.
 
-The intended user of these tools is one who wants a direct programmatic interface to GPU-accelerated CT operations and does not need (or, perhaps, want) a standalone application or GUI.
+The intended user of these tools is one who wants a direct programmatic interface to GPU-accelerated CT operations and does not need (or, perhaps, does not want) a standalone application or GUI.
 
 ## installation
 Specific installation instructions are provided only for Microsoft Windows 7/10. An enterprising Linux user should be able to compile the tools, but this has not yet been tested.
