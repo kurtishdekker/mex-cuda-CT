@@ -12,9 +12,9 @@ Rather, the goal here is to provide the fundamental building blocks - the projec
 The intended user of these tools is one who wants a direct programmatic interface to GPU-accelerated CT operations and does not need (or, perhaps, does not want) a standalone application or GUI.
 
 ## installation
-Specific installation instructions are provided only for Microsoft Windows 7/10. An enterprising Linux user should be able to compile the tools, but this has not yet been tested.
+Specific installation instructions are provided only for Microsoft Windows 7 / 10. An enterprising Linux user should be able to compile the tools, but this has not yet been tested.
 
-[Windows Installation Instructions](documentation/installation.md)
+[Windows installation instructions](documentation/installation.md)
 
 ## usage example - simple FBP
 This example generates cone-beam projections from a uniform cylindrical phantom, and performs a basic FDK reconstruction (Filtered backprojection). A much more interesting test image, the 3D Shepp-Logan head phantom, can be generated using a [MATLAB function by Matthias Schabel][2].
@@ -41,9 +41,9 @@ filteredSino = single(preFilterSinogram(fp, struct('type','cone3d','SAD',SAD),an
 recon = CUDAmex_BP(filteredSino, SAD, angles, geomFlag);
 ```
 ## further information
-[Technical Ramblings](documentation/technicalNotes.md)
+[technical ramblings](documentation/technicalNotes.md)
 
-[Application Examples](documentation/exampleApplications.md)
+[application examples](documentation/exampleApplications.md)
 
 ## references
 <sup>1</sup>W. van Aarle et al., “The ASTRA Toolbox: A platform for advanced algorithm development in electron tomography,” Ultramicroscopy, vol. 157, pp. 35–47, Oct. 2015.
@@ -57,6 +57,16 @@ recon = CUDAmex_BP(filteredSino, SAD, angles, geomFlag);
 ## licensing
 
 The tools here are provided as-is under the [BSD License][1].
+
+## author
+
+**Kurtis H. Dekker, PhD**\
+Department of Medical Physics\
+Cancer Centre of Southeastern Ontario at Kingston General Hospital\
+Kingston, Ontario, CANADA
+
+[linkedin](https://www.linkedin.com/in/kurtisdekker/)\
+[researchgate](https://www.researchgate.net/profile/Kurtis_Dekker)
 
 [1]:LICENSE
 [2]:https://www.mathworks.com/matlabcentral/fileexchange/9416-3d-shepp-logan-phantom
