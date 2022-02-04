@@ -7,7 +7,7 @@ else
 end
 
 matlab_path = [matlabroot '\extern\include'];
-vs_path = 'C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC' %this will need to be changed for your installation of visual studio
+vs_path = 'C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023' %this will need to be changed for your installation of visual studio
 gpu_compute = '-gencode=arch=compute_61,code=sm_61'; %change the numbers for your specific GPU compute capability (i.e. compute capability 5.2 -> 52, etc.)
 
 user_matlab_path = [userpath '\mex-cuda-CT'];
@@ -51,10 +51,14 @@ end
 
 
 % compile the object files into .mex files
-mex('-largeArrayDims','CUDAmex_FP.o', ['-L' cuda_path],'-lcudart');	
-mex('-largeArrayDims','CUDAmex_BP.o', ['-L' cuda_path],'-lcudart');	
-mex('-largeArrayDims','CUDAmex_general3D_FP.o', ['-L' cuda_path],'-lcudart');	
-mex('-largeArrayDims','CUDAmex_general3D_BP.o', ['-L' cuda_path],'-lcudart');	
+% mex('-largeArrayDims','CUDAmex_FP.o', ['-L' cuda_path],'-lcudart');	
+% mex('-largeArrayDims','CUDAmex_BP.o', ['-L' cuda_path],'-lcudart');	
+% mex('-largeArrayDims','CUDAmex_general3D_FP.o', ['-L' cuda_path],'-lcudart');	
+% mex('-largeArrayDims','CUDAmex_general3D_BP.o', ['-L' cuda_path],'-lcudart');	
+mex('CUDAmex_FP.o', ['-L' cuda_path],'-lcudart');	
+mex('CUDAmex_BP.o', ['-L' cuda_path],'-lcudart');	
+mex('CUDAmex_general3D_FP.o', ['-L' cuda_path],'-lcudart');	
+mex('CUDAmex_general3D_BP.o', ['-L' cuda_path],'-lcudart');	
 
 movefile('*.mex*', user_matlab_path);
 
@@ -78,13 +82,22 @@ if status < 0
 end
 
 % compile the object files into .mex files
-mex('/NODEFAULTLIB:MSVCRT.lib','-largeArrayDims', 'CUDAmex_oscIter.o', ['-L' cuda_path], '-lcudart');
-mex('/NODEFAULTLIB:MSVCRT.lib','-largeArrayDims', 'CUDAmex_TVmin_3D.o', ['-L' cuda_path], '-lcudart');
+% mex('/NODEFAULTLIB:MSVCRT.lib','-largeArrayDims', 'CUDAmex_oscIter.o', ['-L' cuda_path], '-lcudart');
+% mex('/NODEFAULTLIB:MSVCRT.lib','-largeArrayDims', 'CUDAmex_TVmin_3D.o', ['-L' cuda_path], '-lcudart');
+mex('/NODEFAULTLIB:MSVCRT.lib', 'CUDAmex_oscIter.o', ['-L' cuda_path], '-lcudart');
+mex('/NODEFAULTLIB:MSVCRT.lib', 'CUDAmex_TVmin_3D.o', ['-L' cuda_path], '-lcudart');
 
 movefile('*.mex*', user_matlab_path);
+copyfile('OSC_TV_recon.m', user_matlab_path);
+
+
 
 % clean up .o files
 delete *.o
 
+%% 
+cd ..\fbp_reconstruction
+copyfile('*.m',user_matlab_path);
 %% add compiled mex functions to MATLAB path
+
 addpath(user_matlab_path); savepath;

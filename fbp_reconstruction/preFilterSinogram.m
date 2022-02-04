@@ -1,4 +1,4 @@
-function [filteredSinogram, filterKernel] = preFilterSinogram(sino,geom,angles,filter,frequencyCutoff)
+function [filteredSinogram, filterKernel] = preFilterSinogram(sino,geom,angles,filter,frequencyCutoff, parker_q)
 % This function applies weighting and filtering to 2D projections (cone,
 % fan3D or par3D) in order to perform FBP / FDK reconstruction
 %
@@ -10,6 +10,7 @@ function [filteredSinogram, filterKernel] = preFilterSinogram(sino,geom,angles,f
 %
 %   filter = filter to apply ('Ramp', 'Shepp-Logan', 'Cosine', 'Hamming', 'Hann', or 'Blackman')
 %   frequencyCutoff = cutoff frequency (normalized between [0 1]) for the filtering step
+%   parker_q = q value for Parker weighting as per Wesarg et al 2002.
 %
 % Outputs:
 %   filteredSinogram = filtered data ready for backprojection
@@ -32,12 +33,21 @@ switch lower(geom.type)
 
     case 'par3d'
         %no geometry weighting required
+        sino = parker_weight(sino,angles,geom, parker_q);
+
     case 'fan3d'
         SAD = geom.SAD;
         [U V] = ndgrid(1:size(sino,1), 1:size(sino,2));
         U = U-(size(sino,1)-1)/2;
         Distance = SAD./sqrt(SAD^2 + U.^2);
         sino = bsxfun(@times,sino,Distance);
+        
+        % short scan
+        %if abs(angles(end)-2*pi) > 0.001
+            sino = parker_weight(sino,angles,geom, parker_q);
+
+        
+        
     case 'cone3d'
     %cone beam weighting
         SAD = geom.SAD;
@@ -46,6 +56,10 @@ switch lower(geom.type)
         V = V-(size(sino,2)-1)/2;
         Distance = SAD./sqrt(SAD^2 + U.^2 + V.^2);
         sino = bsxfun(@times,sino,Distance);
+
+        sino = parker_weight(sino,angles,geom, parker_q);
+
+      
 end
 
 %% Filtering
@@ -64,16 +78,17 @@ parfor i = 1:size(sino,3)
     tmp(N+1 : end, :) = []; %trim zero-padding
     %tmp = tmp(N/2+1 : (3*N/2),:,:); %trim zero padding
     if i>1 
-        tmp = tmp .* (angles(i)-angles(i-1))/4;
+        tmp = tmp .* (angles(i)-angles(i-1))/2;
     else
-        tmp = tmp .* (angles(i+1)-angles(i))/4;
+        tmp = tmp .* (angles(i+1)-angles(i))/2;
     end
     
     filteredSinogram(:,:,i) = (tmp);
 
 end
 filterKernel = H;
- filteredSinogram = single(filteredSinogram);
+filteredSinogram = single(filteredSinogram);
+
 %----------------------------------------------------------------------
 
 %% filter design function
