@@ -52,7 +52,7 @@ for k = 1:numIter
         CUDAmex_oscIter(mu, pre, post, numSubsets, subsetPicks, scanAngles,geom.SAD,0);
     elseif strcmpi(geom.type,'fan3d')
         CUDAmex_oscIter(mu, pre, post, numSubsets, subsetPicks, scanAngles, geom.SAD,1);
-    elseif strcmpi(geom.type,'cone')
+    elseif strcmpi(geom.type,'cone3d') || strcmpi(geom.type,'cone')
         CUDAmex_oscIter(mu,pre,post,numSubsets,subsetPicks,scanAngles, geom.SAD,2);
     else
         error('Invalid Geometry Selection');
@@ -66,6 +66,8 @@ for k = 1:numIter
         mu_old(isnan(mu_old))=0;
         d_a = sqrt(sum(mu_old(:).^2));
         mu = CUDAmex_TVmin_3D(mu,TV_constant*d_a); %call mex for Tv-min, first multiply TV-const  by d_a
+        mu(isnan(mu))=0;
+        mu(isinf(mu))=0;
     end
     figure(1000); imagesc(mu(:,:,round(size(mu,3)/2))); axis equal; axis tight; title(['iteration: ' num2str(k)]); pause(0.01);
 end

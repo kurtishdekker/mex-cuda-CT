@@ -1,4 +1,4 @@
-function recon = FBP_recon(pre,post, scanAngles, geom,filter,filterCutoff)
+function recon = FBP_recon(pre,post, scanAngles, geom,filter,filterCutoff, parker_q)
 %FBP_RECON.M - gpu reconstruction with FBP
 %
 %Inputs:
@@ -8,6 +8,7 @@ function recon = FBP_recon(pre,post, scanAngles, geom,filter,filterCutoff)
 %       scanAngles - the projection angles
 %       filter - the filter type, see preFilterSinogram.m for options
 %       filterCutoff - the normalized filter cutoff frequency
+%       parker_q - the q-value for modified parker weights (Wesarg 2002)
 %
 %Output:
 %       recon - final reconstruction dataset. Size will be determined by
@@ -26,14 +27,14 @@ sino = -log(post./pre);
 sino(isnan(sino)) = 0;
 sino(isinf(sino)) = 0;
 
-filteredSino = single(preFilterSinogram(sino,geom,scanAngles,filter,filterCutoff))
+filteredSino = single(preFilterSinogram(sino,geom,scanAngles,filter,filterCutoff,parker_q))
 %% backproject
 
 if strcmpi(geom.type,'par3d')
     recon = CUDAmex_BP(filteredSino,geom.SAD,scanAngles,0);
 elseif strcmpi(geom.type,'fan3d')
     recon = CUDAmex_BP(filteredSino,geom.SAD,scanAngles,1);
-elseif strcmpi(geom.type,'cone')
+elseif strcmpi(geom.type,'cone') || strcmpi(geom.type,'cone3d')
     recon = CUDAmex_BP(filteredSino,geom.SAD,scanAngles,2);
 else
 	error('Invalid Geometry Selection');
